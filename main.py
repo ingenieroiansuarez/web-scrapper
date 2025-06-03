@@ -4,6 +4,12 @@ import selectorlib
 import smtplib, ssl
 import os
 
+"INSERT INTO events VALUES ('tigers', 'tiger city', '2023-10-01')"
+"SELECT * FROM events WHERE date='2025.10.05'"
+
+
+
+
 URL = "https://programmer100.pythonanywhere.com/tours/"
 
 def scrape(URL):
@@ -13,11 +19,13 @@ def scrape(URL):
     return source
 
 def extract(source):
+    # Extract the tour data from the scraped HTML source using selectorlib.
     extractor = selectorlib.Extractor.from_yaml_file("extract.yaml")
     value = extractor.extract(source)["tours"]
     return value
 
 def send_email(message):
+    # Send an email notification with the given message.
     host = "smtp.gmail.com"
     port = 465
 
